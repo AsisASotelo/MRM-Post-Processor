@@ -1,9 +1,9 @@
-## qt_template.py
+## widget_test.py
 ##
 ## Asis A Sotelo
-## January 19, 2021
+## January 20, 2021
 ##
-## A Template for PyQt GUIs
+## A Template for Widget Tests
 ##
 
 
