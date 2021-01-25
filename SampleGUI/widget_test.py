@@ -1,31 +1,124 @@
-## widget_test.py
+# widget_test.py
 ##
-## Asis A Sotelo
-## January 20, 2021
+# Asis A Sotelo
+# January 20, 2021
 ##
-## A Template for Widget Tests
+# A Template for Widget Tests
 ##
 
 
-import sys 
+import sys
 from PyQt5 import QtWidgets as qtw
-from PyQt5 import QtGui as gtg
+from PyQt5 import QtGui as qtg
 from PyQt5 import QtCore as qtc
 
+
 class MainWindow(qtw.QWidget):
-	def __init__(self):
-		"""MainWindow Constructor"""
+    def __init__(self):
+        """MainWindow Constructor"""
 
-		super().__init__()
-		# MAIN UI CODE GOES HERE
-	
-		# END MAIN UI CODE
-		
-		self.show()
+        super().__init__()
+        # MAIN UI CODE GOES HERE
+
+        label = qtw.QLabel('Hello Widgets!', self)
+        label.setText("Hi There, Widgets!")
+        label.setFixedSize(150,40) ## Sets the pixel dimenstions of the label
+        print(label.text())
+
+        line_edit = qtw.QLineEdit(
+            'default value',
+            self,
+            placeholderText='Type Here',
+            clearButtonEnabled=True,
+            maxLength=20)
+
+        line_edit.setMinimumSize(150,15)
+        line_edit.setMaximumSize(400,50)
+
+        button = qtw.QPushButton(
+            "Push Me",
+            self,
+            checkable=True,
+            checked=True,
+            shortcut=qtg.QKeySequence('Ctrl+p'))
+
+        combobox = qtw.QComboBox(
+            self,
+            editable=True,
+            insertPolicy=qtw.QComboBox.InsertAtTop
+
+        )
+
+        combobox.addItem('Lemon', 1)
+        combobox.addItem('Peach', 'Ohh I like peaches')
+        combobox.addItem('Strawberry', qtw.QWidget)
+        combobox.insertItem(1, 'Radish', 2)
+
+        datetimebox = qtw.QDateTimeEdit(
+            self,
+            date=qtc.QDate.currentDate(),
+            time=qtc.QTime(12, 30),
+            calendarPopup=True,
+            maximumDate=qtc.QDate(2030, 1, 1),
+            maximumTime=qtc.QTime(17, 0),
+            displayFormat='yyyy-MM-dd HH:mm'
+        )
+
+        spinbox = qtw.QSpinBox(
+            self,
+            value=12,
+            maximum=100,
+            minimum=10,
+            prefix='$',
+            suffix=' + Tax',
+            singleStep=5
+        )
+
+        textedit = qtw.QTextEdit(
+            self,
+            acceptRichText=False,
+            lineWrapMode=qtw.QTextEdit.FixedColumnWidth,
+            lineWrapColumnOrWidth=25,
+            placeholderText='Enter your text here'
+        )
+
+        ## QVBoxLayout
+
+        layout = qtw.QVBoxLayout()
+        self.setLayout(layout)
+        layout.addWidget(label)
+        layout.addWidget(line_edit)
+
+        sublayout = qtw.QHBoxLayout()
+        layout.addLayout(sublayout)
+        
+        sublayout.addWidget(button)
+        sublayout.addWidget(combobox)
+
+        ## QGridLayout 
+
+        grid_layout = qtw.QGridLayout()
+        layout.addLayout(grid_layout)
+        grid_layout.addWidget(spinbox,0,0)
+        grid_layout.addWidget(datetimebox,0,1)
+        grid_layout.addWidget(textedit,1,0,2,2)
+
+        ## QFormLayout
+
+        form_layout = qtw.QFormLayout()
+        layout.addLayout(form_layout)
+
+        form_layout.addRow('Item 1', qtw.QLineEdit(self))
+        form_layout.addRow('Item 2',qtw.QLineEdit(self))
+        form_layout.addRow(qtw.QLabel('<b>This is a label-only row</b>'))
 
 
+        # END MAIN UI CODE
 
-if __name__=='__main__':
-	app = qtw.QApplication(sys.argv)
-	mw = MainWindow()
-	sys.exit(app.exec())
+        self.show()
+
+
+if __name__ == '__main__':
+    app = qtw.QApplication(sys.argv)
+    mw = MainWindow()
+    sys.exit(app.exec())
