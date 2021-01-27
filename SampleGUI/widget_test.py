@@ -134,12 +134,18 @@ class MainWindow(qtw.QWidget):
 
         ## QGroubBox
 
-        groupbox = qtw.QGroupBox('Button')
+        groupbox = qtw.QGroupBox(
+            'Buttons',
+            checkable=True,
+            checked=True,
+            alignment=qtc.Qt.AlignHCenter,
+            flat=True)
         groupbox.setLayout(qtw.QHBoxLayout())
         groupbox.layout().addWidget(qtw.QPushButton('OK'))
         groupbox.layout().addWidget(qtw.QPushButton('Cance'))
         layout.addWidget(groupbox)
         
+        ## Validating Widgets
 
 
 
