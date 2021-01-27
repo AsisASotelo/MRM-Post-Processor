@@ -74,12 +74,17 @@ class MainWindow(qtw.QWidget):
             singleStep=5
         )
 
+        spinbox.setSizePolicy(qtw.QSizePolicy.Fixed,qtw.QSizePolicy.Preferred)
+
         textedit = qtw.QTextEdit(
             self,
             acceptRichText=False,
             lineWrapMode=qtw.QTextEdit.FixedColumnWidth,
             lineWrapColumnOrWidth=25,
             placeholderText='Enter your text here'
+        )
+        textedit.setSizePolicy(
+            qtw.QSizePolicy.MinimumExpanding,qtw.QSizePolicy.MinimumExpanding
         )
 
         ## QVBoxLayout
@@ -98,7 +103,7 @@ class MainWindow(qtw.QWidget):
         ## QGridLayout 
 
         grid_layout = qtw.QGridLayout()
-        layout.addLayout(grid_layout)
+        #layout.addLayout(grid_layout)
         grid_layout.addWidget(spinbox,0,0)
         grid_layout.addWidget(datetimebox,0,1)
         grid_layout.addWidget(textedit,1,0,2,2)
@@ -111,6 +116,31 @@ class MainWindow(qtw.QWidget):
         form_layout.addRow('Item 1', qtw.QLineEdit(self))
         form_layout.addRow('Item 2',qtw.QLineEdit(self))
         form_layout.addRow(qtw.QLabel('<b>This is a label-only row</b>'))
+
+        ## QTabWidget
+
+        tab_widget = qtw.QTabWidget(
+            movable=True,
+            tabPosition=qtw.QTabWidget.West,
+            tabShape=qtw.QTabWidget.Triangular,
+        )
+        layout.addWidget(tab_widget)
+
+        
+        container = qtw.QWidget(self)
+        container.setLayout(grid_layout)
+
+        tab_widget.addTab(container,"Drop the Top")
+
+        ## QGroubBox
+
+        groupbox = qtw.QGroupBox('Button')
+        groupbox.setLayout(qtw.QHBoxLayout())
+        groupbox.layout().addWidget(qtw.QPushButton('OK'))
+        groupbox.layout().addWidget(qtw.QPushButton('Cance'))
+        layout.addWidget(groupbox)
+        
+
 
 
         # END MAIN UI CODE
