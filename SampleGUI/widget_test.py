@@ -113,7 +113,7 @@ class MainWindow(qtw.QWidget):
         form_layout = qtw.QFormLayout()
         layout.addLayout(form_layout)
 
-        form_layout.addRow('Item 1', qtw.QLineEdit(self))
+        form_layout.addRow('Item 1', qtw.QLineEdit(self)) 
         form_layout.addRow('Item 2',qtw.QLineEdit(self))
         form_layout.addRow(qtw.QLabel('<b>This is a label-only row</b>'))
 
@@ -142,10 +142,12 @@ class MainWindow(qtw.QWidget):
             flat=True)
         groupbox.setLayout(qtw.QHBoxLayout())
         groupbox.layout().addWidget(qtw.QPushButton('OK'))
-        groupbox.layout().addWidget(qtw.QPushButton('Cance'))
+        groupbox.layout().addWidget(qtw.QPushButton('Cancel'))
         layout.addWidget(groupbox)
         
         ## Validating Widgets
+
+
 
 
 
